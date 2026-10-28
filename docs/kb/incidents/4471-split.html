@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_app/immutable/entry/start.Cc1BpZY9.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/payload.DSmR2FwN.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CRzLMJPS.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/Celcb8_a.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BCPXOG7W.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BsYkVo0R.js" rel="modulepreload">
+		<link href="../../_app/immutable/entry/app.BdTgKStN.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/0.C9KfiiPz.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/DK3Fl9T5.js" rel="modulepreload">
+		<link href="../../_app/immutable/nodes/5.96upcy8o.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BQBibJSI.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BTPwLomz.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/CVBzP17p.js" rel="modulepreload">
+		<link href="../../_app/immutable/chunks/BIy4WKJS.js" rel="modulepreload">
+		<!--e2jw2j--><!----><title>#4471 split · three problems, not one · support kb</title>
+		<link href="../../_app/immutable/assets/runbook.COyw0cbZ.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/Callout.AbLv9dM_.css" rel="stylesheet">
+		<link href="../../_app/immutable/assets/_page.D3E3_zoj.css" rel="stylesheet">
+  </head>
+  <body>
+    <div style="display: contents"><!--[--><!--[--><!--[0--><!--[--><!--[--><!--[-1--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/support-kb-4471/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">#4471 split · three problems, not one</h1> <p class="meta svelte-e2jw2j"><span>owner <b>support desk</b></span> <span class="status open svelte-e2jw2j">open</span> <span class="svelte-e2jw2j">reviewed 2026-10-28 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><a href="/support-kb-4471/kb/incidents/4471">#4471</a> said one issue with one fix queued. Its reports describe three
+problems, and the parser fix covered only one of them. Each problem has its own ticket.</p> <aside class="warn svelte-17bri61"><!---->#4471 closed on 5 October with the parser fixed and booking-v3 retired. The one-day problem is
+not fixed: its ticket stays open.<!----></aside><!----> <h2>The problems</h2> <p class="sum svelte-1op6c6"><strong>412</strong> reports merged into #4471
+  (427 rows in the export, 15 of them repeats) · <strong>3</strong> problems</p> <table><thead><tr><th>problem</th><th>reports</th><th>channels</th><th>tenants</th><th>seen</th><th>intake tagged otherwise</th><th>ticket</th></tr></thead><tbody><!--[--><tr><td><code>parser</code><br/><span class="what svelte-1op6c6">the shared parser reads day-first dates month first</span></td><td><strong>374</strong></td><td class="muted svelte-1op6c6">app ×202 · email ×147 · form ×25</td><td>11</td><td class="muted svelte-1op6c6">2026-04-01 → 2026-10-04</td><td>23</td><td><!--[0--><a href="https://github.com/AdditionAddict/support-kb-4471/issues/1">#1</a><!--]--></td></tr><tr><td><code>hint</code><br/><span class="what svelte-1op6c6">booking-v3 tells day-first tenants to type month first</span></td><td><strong>33</strong></td><td class="muted svelte-1op6c6">form ×33</td><td>3</td><td class="muted svelte-1op6c6">2026-04-17 → 2026-09-22</td><td>15</td><td><!--[0--><a href="https://github.com/AdditionAddict/support-kb-4471/issues/2">#2</a><!--]--></td></tr><tr><td><code>one-day</code><br/><span class="what svelte-1op6c6">the booking lands one day off, not swapped</span></td><td><strong>5</strong></td><td class="muted svelte-1op6c6">email ×3 · app ×2</td><td>5</td><td class="muted svelte-1op6c6">2026-04-02 → 2026-10-04</td><td>5</td><td><!--[0--><a href="https://github.com/AdditionAddict/support-kb-4471/issues/3">#3</a><!--]--></td></tr><!--]--></tbody></table><!----> <ul><li><strong><code>parser</code></strong>: the shared parser reads every date month first; every tenant here writes the
+day first. Day and month swap. <strong>Fixed</strong> (<code>fix(dates): parse dd/mm for eu locales</code>); ticket closed.</li> <li><strong><code>hint</code></strong>: booking-v3 prints <code>MM/DD/YYYY</code> under its date field. Customers of day-first tenants on
+booking-v3 type the month first, as told, and the form reads it day first. Only the form
+channel, only booking-v3. <strong>Won’t fix</strong>: booking-v3 is retired; ticket closed.</li> <li><strong><code>one-day</code></strong>: the booking moves by one day, not a swap: Tuesday shows as Monday, two time zones
+see two days, an invite arrives before its booking. That is a time-zone conversion. The desk
+already noted these reports in <code>desk-notes.json</code>; the old table still counted them under <code>parser</code>. <strong>Open</strong>: neither the parser fix nor
+retiring booking-v3 touches a time-zone shift.</li></ul> <h2>How the split is made</h2> <ul><li>The export pages overlap, so a report can come twice. Each id counts once.</li> <li>A report’s problem comes from its tenant (locale and booking form, <code>causes.ts</code>) and the desk’s
+one-day notes, never from intake’s tag. Intake guesses from the reporter’s browser, and the
+table shows how often that guess disagrees.</li> <li>Merging on subject line (<a href="/support-kb-4471/kb/decisions/0001-dedupe-by-subject">decision 0001</a>) cannot tell them
+apart: the three problems arrive under the same subject lines.</li></ul> <h2>Lessons</h2> <ul><li>Same subject is not same cause. Before marking a big ticket known, group its reports by cause.</li> <li>A footnote that says “read differently” is a problem nobody has filed yet.</li></ul> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-GRNJ-K55R</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!--]--><!--]--><!----><!--]--><!--]--><!--]--><!----> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_4ntgrj = {
+						base: new URL("../..", location).pathname.slice(0, -1),
+						version: "1793168961744",
+						assets: "/support-kb-4471"
+					};
+
+					const element = document.currentScript.parentElement;
+
+					import("../../_app/immutable/entry/start.Cc1BpZY9.js").then(async (kit) => {
+						kit.init(__sveltekit_4ntgrj);
+						const app = await import("../../_app/immutable/entry/app.BdTgKStN.js");
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>
