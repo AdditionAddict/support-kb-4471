@@ -1,7 +1,7 @@
-# The page as the desk sees it
+# The pages as the desk sees them
 
-`apps/kb/routes/kb/incidents/4471-split/+page.svx`, built with `npm run build` (from the repo root)
-and served at `/kb/incidents/4471-split`.
+One page per ticket split out of #4471: `apps/kb/routes/kb/incidents/{1,2,3}/+page.svx`, built with
+`npm run build` from the repo root and served at `/kb/incidents/1`, `/2`, `/3`.
 
-- `kb-incidents-4471-split.png`: full-page screenshot of the built page (light theme).
-- `kb-incidents-4471-split.html`: the prerendered HTML.
+- `kb-incidents-N.png`: full-page screenshot of the built page (light theme).
+- `kb-incidents-N.html`: the prerendered HTML.

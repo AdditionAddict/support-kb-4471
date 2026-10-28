@@ -56,3 +56,17 @@ export function splitTicket(
     .sort((a, b) => b.reports.length - a.reports.length);
   return { rows: all.filter((r) => r.mergedInto === ticket).length, merged, groups };
 }
+
+// The reports one problem's ticket covers, counted the way the desk's view counts them
+// (CauseTable): by tenant cause, with one-day reports also counted under their tenant's cause.
+export function reportsFor(
+  all: Report[],
+  ticket: number,
+  problem: Problem,
+  tenantOf: (r: Report) => Tenant | undefined,
+  oneDayMove: readonly string[],
+): Report[] {
+  const merged = uniqueById(all).filter((r) => r.mergedInto === ticket);
+  if (problem === 'one-day') return merged.filter((r) => oneDayMove.includes(r.id));
+  return merged.filter((r) => (causeOf(r, tenantOf(r)) ?? 'unplaced') === problem);
+}

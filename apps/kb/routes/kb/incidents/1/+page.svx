@@ -1,0 +1,30 @@
+---
+layout: runbook
+title: '#1 · the shared parser reads day-first dates month first'
+owner: support desk
+status: fixed
+reviewed: 2026-10-28
+signature: AdditionAddict
+---
+
+<script>
+  import TicketSummary from '#lib/kb/TicketSummary.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+Split out of [#4471](/kb/incidents/4471), with [#2](/kb/incidents/2) and [#3](/kb/incidents/3).
+
+<TicketSummary problem="parser" ticket={1} repo="https://github.com/AdditionAddict/support-kb-4471" />
+
+## What breaks
+
+The shared parser reads every date month first. Every tenant here writes the day first, so any
+date with a day of 12 or less swaps day and month: 7 April becomes 4 July. Every channel, every
+tenant, except form bookings through booking-v3 ([#2](/kb/incidents/2)).
+
+## Outcome
+
+**Fixed** with `fix(dates): parse dd/mm for eu locales`; #4471 closed on 5 October. The one-day
+reports counted here are a different bug and stay open in [#3](/kb/incidents/3).
+
+<RenderStamp {signature} />
