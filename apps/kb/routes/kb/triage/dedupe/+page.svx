@@ -23,11 +23,6 @@ A report is a duplicate when its **subject line matches** the subject of an open
 2. look for an open ticket with the same subject;
 3. found one: merge the report into it. None: open a new ticket.
 
-<Callout kind="warn">
-Subject matching merged three problems into #4471 ([#4472](/kb/incidents/4472)).
-[Decision 0002](/kb/decisions/0002-dedupe-by-cause) proposes merging by cause instead.
-</Callout>
-
 <Callout>
 Matching on subject is fast and needs no reading. During an incident that matters more than
 anything else.
