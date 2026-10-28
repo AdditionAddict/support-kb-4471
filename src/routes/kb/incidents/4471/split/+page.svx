@@ -13,11 +13,12 @@ signature: Andrew Allen
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-[#4471](/kb/incidents/4471) says one issue with one fix queued. Its reports describe three
-problems, and the queued parser fix covers only one of them. Each problem now has its own ticket.
+[#4471](/kb/incidents/4471) said one issue with one fix queued. Its reports describe three
+problems, and the parser fix covered only one of them. Each problem has its own ticket.
 
 <Callout kind="warn">
-#4471 is not known. Close it only when all three tickets below are fixed.
+#4471 closed on 5 October with the parser fixed and booking-v3 retired. The one-day problem is
+not fixed: its ticket stays open.
 </Callout>
 
 ## The problems
@@ -25,13 +26,14 @@ problems, and the queued parser fix covers only one of them. Each problem now ha
 <ProblemTable ticket={4471} repo="https://github.com/AdditionAddict/support-kb-4471" tickets={{ parser: 1, hint: 2, 'one-day': 3 }} />
 
 - **`parser`**: the shared parser reads every date month first; every tenant here writes the
-  day first. Day and month swap. This is the fix #4471 already has queued.
+  day first. Day and month swap. **Fixed** (`fix(dates): parse dd/mm for eu locales`); ticket closed.
 - **`hint`**: booking-v3 prints `MM/DD/YYYY` under its date field. Customers of day-first tenants on
   booking-v3 type the month first, as told, and the form reads it day first. Only the form
-  channel, only booking-v3. The parser fix does not touch it.
+  channel, only booking-v3. **Won't fix**: booking-v3 is retired; ticket closed.
 - **`one-day`**: the booking moves by one day, not a swap: Tuesday shows as Monday, two time zones
   see two days, an invite arrives before its booking. That is a time-zone conversion. The desk
-  already noted these reports in `desk-notes.json`; the old table still counted them under `parser`.
+  already noted these reports in `desk-notes.json`; the old table still counted them under `parser`. **Open**: neither the parser fix nor
+  retiring booking-v3 touches a time-zone shift.
 
 ## How the split is made
 
