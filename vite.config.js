@@ -12,11 +12,10 @@ export default defineConfig({
         vitePreprocess(),
         mdsvex({ extensions: ['.svx'], layout: { runbook: new URL('./apps/kb/lib/layouts/runbook.svelte', import.meta.url).pathname } }),
       ],
-      adapter: adapter({ pages: process.env.OUT_DIR ?? 'build' }),
-      paths: { base: process.env.BASE_PATH ?? '', relative: true },
+      adapter: adapter(),
       files: { src: 'apps/kb' },
       alias: { '#lib': 'apps/kb/lib' },
-      prerender: { handleHttpError: 'warn', handleMissingId: 'warn', entries: ['*', '/kb/incidents/4471', '/kb/triage/dedupe', '/kb/decisions/0001-dedupe-by-subject'] },
+      prerender: { entries: ['*', '/kb/incidents/4471', '/kb/triage/dedupe', '/kb/decisions/0001-dedupe-by-subject'] },
     }),
   ],
 });
